@@ -10,9 +10,9 @@ const fieldClasses =
   "w-full rounded-sm border border-charcoal/15 bg-white px-4 py-2.5 font-body text-sm text-charcoal placeholder:text-charcoal/35 focus:border-leaf";
 
 const WORKFLOW_STEPS = [
-  { title: "Add the sender", description: "Enter any @ecostructdynamicsltd.com address and submit." },
-  { title: "It's live immediately", description: "ecostructdynamicsltd.com is already verified with our email provider, so a new address on the same domain doesn't need separate DNS work — it's created verified and active right away." },
-  { title: "Use it in Compose", description: "The new address appears in the From dropdown as soon as it's added — no extra step, no deployment." },
+  { title: "Propose the sender", description: "Enter an @ecostructdynamicsltd.com address and submit it for review." },
+  { title: "Verify with the provider", description: "Confirm the exact sender and any required DNS records directly in the email provider dashboard." },
+  { title: "Activate it explicitly", description: "After verification, use Activate to make the sender available in Compose." },
   { title: "Disable it later if needed", description: "Use Deactivate on any sender to remove it from Compose without deleting its history. Reactivate brings it back." },
 ];
 
@@ -113,10 +113,9 @@ export default async function SendersPage() {
       <div className="mt-10 max-w-lg">
         <h2 className="font-display text-lg font-semibold text-charcoal">Add a Sender</h2>
         <p className="mt-1 font-body text-sm text-charcoal/55">
-          Must be an @ecostructdynamicsltd.com address. It becomes{" "}
-          <strong className="font-semibold">active in Compose immediately</strong> — no manual
-          activation step, no deployment. Use Deactivate afterward if you ever need to take it out
-          of rotation.
+          Must be an @ecostructdynamicsltd.com address. New senders start as{" "}
+          <strong className="font-semibold">pending and inactive</strong>. Verify the address with
+          the provider, then activate it here before using it in Compose.
         </p>
 
         <form action={proposeSender} className="mt-5 space-y-4">
@@ -145,7 +144,7 @@ export default async function SendersPage() {
             type="submit"
             className="inline-flex items-center justify-center rounded-sm border border-charcoal/20 px-6 py-2.5 font-body text-sm font-semibold uppercase tracking-[0.08em] text-charcoal hover:border-charcoal"
           >
-            Add Sender
+            Propose Sender
           </button>
         </form>
       </div>

@@ -23,27 +23,16 @@ export async function proposeSender(formData: FormData) {
 
   const supabase = createClient();
 
-  // Created as verified + active immediately. This is safe specifically
-  // because DNS/SPF/DKIM verification with the email provider is done once,
-  // at the *domain* level (ecostructdynamicsltd.com) — not per mailbox.
-  // Once that domain-wide verification is complete (it is, as of Phase 0),
-  // any further @ecostructdynamicsltd.com address is already covered by
-  // it; there is no additional provider-side step for a new address on the
-  // same domain to actually be able to send. The gate that matters here is
-  // "only an authenticated, authorized admin can call this" (checkAdmin()
-  // above) plus "only this exact domain" (the CHECK constraint on
-  // senders.email, enforced at the database level regardless of this
-  // code path) — both of which are unchanged and still enforced.
-  //
-  // The Activate/Deactivate controls below remain for taking an existing
-  // sender out of rotation (or back in) without deleting it — e.g. if an
-  // address is retired, or was added in error.
+  // Proposing a sender never activates it. An admin must first verify the
+  // address with the provider, then use the explicit Activate control below.
+  // This keeps the approval boundary visible even when the domain itself has
+  // already been verified.
   const { error } = await supabase.from("senders").insert({
     email,
     display_name: displayName,
     reply_to: email,
-    is_active: true,
-    verification_status: "verified",
+    is_active: false,
+    verification_status: "pending",
   });
 
   // Notification only follows a genuinely successful insert — a rejected
@@ -54,9 +43,9 @@ export async function proposeSender(formData: FormData) {
     await notifyAllAdmins({
       actorAdminId: result.context.adminId,
       actorName,
-      type: "SENDER_ADDED",
-      title: "Sender added",
-      message: `${actorName} added sender ${email}. It's active and available in Compose now.`,
+      type: "SENDER_PROPOSED",
+      title: "Sender proposed",
+      message: `${actorName} proposed sender ${email}. Verify it with the provider, then activate it before sending.`,
       entityType: "sender",
       entityId: email,
       metadata: { email, displayName },

@@ -14,7 +14,7 @@ export const ACTIVITY_TYPES = [
   "EMAIL_SENT",
   "EMAIL_FAILED",
 
-  "SENDER_ADDED",
+  "SENDER_PROPOSED",
   "SENDER_ACTIVATED",
   "SENDER_DEACTIVATED",
 
@@ -49,7 +49,7 @@ export const DEFAULT_SEVERITY: Record<ActivityType, NotificationSeverity> = {
   EMAIL_SENT: "success",
   EMAIL_FAILED: "error",
 
-  SENDER_ADDED: "success",
+  SENDER_PROPOSED: "info",
   SENDER_ACTIVATED: "success",
   SENDER_DEACTIVATED: "warning",
 

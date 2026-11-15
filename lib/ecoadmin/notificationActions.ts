@@ -10,8 +10,7 @@ import {
 } from "./notifications";
 
 // A small number of recent notifications for the bell popover — never the
-// full activity history. The activity page (a later phase) will use
-// getActivity() directly with real pagination instead.
+// full activity history. The activity page uses getActivity() with pagination.
 const BELL_RECENT_LIMIT = 12;
 
 export interface NotificationSummary {
@@ -50,4 +49,9 @@ export async function markAllNotificationsReadAction(): Promise<{ error: string 
   const result = await checkAdmin();
   if (!result.ok) return { error: "Not authorized." };
   return markAllNotificationsRead(result.context.adminId);
+}
+
+/** Form actions must resolve to void; keep the result-returning action above for client calls. */
+export async function markAllNotificationsReadFormAction(_formData: FormData): Promise<void> {
+  await markAllNotificationsReadAction();
 }
