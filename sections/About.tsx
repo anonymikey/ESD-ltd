@@ -77,6 +77,30 @@ export default function About() {
                 they become available.
               </p>
             </RevealOnScroll>
+
+            <RevealOnScroll delay={200} className="mt-10 border-t border-charcoal/10 pt-8">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-steel">
+                At a glance
+              </span>
+              <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden border border-charcoal/10 bg-charcoal/10">
+                <div className="bg-offwhite p-5">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-steel">Base</span>
+                  <p className="mt-2 font-display text-base font-semibold text-charcoal">Mombasa, Kenya</p>
+                </div>
+                <div className="bg-offwhite p-5">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-steel">Disciplines</span>
+                  <p className="mt-2 font-display text-base font-semibold text-charcoal">Engineering + more</p>
+                </div>
+                <div className="bg-offwhite p-5">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-steel">Approach</span>
+                  <p className="mt-2 font-display text-base font-semibold text-charcoal">Discover to Deliver</p>
+                </div>
+                <div className="bg-offwhite p-5">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-steel">Focus</span>
+                  <p className="mt-2 font-display text-base font-semibold text-charcoal">Responsible delivery</p>
+                </div>
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
       </div>

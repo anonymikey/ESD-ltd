@@ -19,38 +19,38 @@ export default function Contact() {
             </RevealOnScroll>
 
             <RevealOnScroll delay={100} className="mt-10 space-y-6">
-              <div>
+              <div className="border-b border-offwhite/10 pb-6">
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-offwhite/45">
-                  Website enquiries
+                  Primary enquiries
                 </span>
                 <a
                   href={`mailto:${site.emails.website}`}
-                  className="mt-1 block font-display text-lg font-medium text-offwhite underline decoration-offwhite/20 decoration-1 underline-offset-4 transition-colors duration-300 hover:text-leaf hover:decoration-leaf"
+                  className="mt-2 block font-display text-xl font-semibold text-leaf underline decoration-leaf/40 decoration-1 underline-offset-4 transition-colors duration-300 hover:text-leaf-light hover:decoration-leaf-light"
                 >
                   {site.emails.website}
                 </a>
+                <p className="mt-2 font-body text-sm leading-relaxed text-offwhite/55">
+                  For project enquiries and general questions, this is the best place to start.
+                </p>
               </div>
               <div>
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-offwhite/45">
-                  Official company email
+                  Additional contacts
                 </span>
-                <a
-                  href={`mailto:${site.emails.official}`}
-                  className="mt-1 block font-display text-lg font-medium text-offwhite underline decoration-offwhite/20 decoration-1 underline-offset-4 transition-colors duration-300 hover:text-leaf hover:decoration-leaf"
-                >
-                  {site.emails.official}
-                </a>
-              </div>
-              <div>
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-offwhite/45">
-                  Direct contact
-                </span>
-                <a
-                  href={`mailto:${site.emails.direct}`}
-                  className="mt-1 block font-display text-lg font-medium text-offwhite underline decoration-offwhite/20 decoration-1 underline-offset-4 transition-colors duration-300 hover:text-leaf hover:decoration-leaf"
-                >
-                  {site.emails.direct}
-                </a>
+                <div className="mt-3 space-y-3">
+                  <a
+                    href={`mailto:${site.emails.official}`}
+                    className="block font-display text-base font-medium text-offwhite underline decoration-offwhite/20 decoration-1 underline-offset-4 transition-colors duration-300 hover:text-leaf hover:decoration-leaf"
+                  >
+                    {site.emails.official}
+                  </a>
+                  <a
+                    href={`mailto:${site.emails.direct}`}
+                    className="block font-display text-base font-medium text-offwhite underline decoration-offwhite/20 decoration-1 underline-offset-4 transition-colors duration-300 hover:text-leaf hover:decoration-leaf"
+                  >
+                    {site.emails.direct}
+                  </a>
+                </div>
               </div>
 
               <div className="border-t border-offwhite/10 pt-6">

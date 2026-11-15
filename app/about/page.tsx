@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import SectionHeading from "@/components/SectionHeading";
+import Impact from "@/sections/Impact";
+import Quality from "@/sections/Quality";
 import { coreValues, mission, site, vision } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -143,6 +145,8 @@ export default function AboutPage() {
             </RevealOnScroll>
           </div>
         </section>
+        <Impact />
+        <Quality />
       </main>
       <Footer />
     </>

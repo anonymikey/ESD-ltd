@@ -115,17 +115,15 @@ export default function ContactForm() {
           Send Message
         </button>
         <p className="font-body text-xs leading-relaxed text-offwhite/45 sm:max-w-[220px]">
-          This form isn&rsquo;t connected to email delivery yet — please use
-          the addresses below in the meantime.
+          Email the primary address below while form delivery is being connected.
         </p>
       </div>
 
       <div aria-live="polite" className="min-h-[1.5rem]">
         {status === "submitted" && (
           <p className="font-body text-sm text-leaf-light">
-            Thanks — this form isn&rsquo;t wired up to send messages yet.
-            Please email us directly using the addresses above so we can
-            respond.
+            Your enquiry is ready. Please email the primary address above so we
+            can receive and respond to it.
           </p>
         )}
       </div>
