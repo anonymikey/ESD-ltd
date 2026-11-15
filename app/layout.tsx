@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { site } from "@/lib/data";
+import AccessibilityWidget from "@/components/AccessibilityWidget";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -54,6 +55,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
+        <AccessibilityWidget />
       </body>
     </html>
   );
