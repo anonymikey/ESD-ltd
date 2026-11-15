@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Hero from "@/sections/Hero";
+import WhatWeDo from "@/sections/WhatWeDo";
 import Capabilities from "@/sections/Capabilities";
 import About from "@/sections/About";
 import Services from "@/sections/Services";
@@ -19,6 +20,7 @@ export default function Home() {
       <Navbar />
       <main id="main-content">
         <Hero />
+        <WhatWeDo />
         <Capabilities />
         <About />
         <Services />

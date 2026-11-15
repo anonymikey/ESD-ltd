@@ -76,27 +76,26 @@ export default function Hero() {
           {site.tagline}
         </h1>
         <p className="mt-7 max-w-xl text-balance font-body text-lg leading-relaxed text-offwhite/75 md:text-xl">
-          An integrated engineering, infrastructure, technology and
-          sustainability company — one company, multiple capabilities,
-          delivering solutions that create value for clients, opportunity
-          for communities, and a healthier planet.
+          EcoStruct brings engineering, construction, technology and
+          sustainability disciplines together for clients seeking practical,
+          responsible solutions that create value for people and planet.
         </p>
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
           <a
-            href="#capabilities"
+            href="#contact"
             className="group inline-flex items-center justify-center gap-2 rounded-sm bg-leaf px-7 py-3.5 font-body text-sm font-semibold uppercase tracking-[0.1em] text-charcoal transition-all duration-300 ease-engineer hover:bg-leaf-light"
           >
-            Explore Our Capabilities
+            Request a Consultation
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 ease-engineer group-hover:translate-x-1" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="square" />
             </svg>
           </a>
           <a
-            href="#contact"
+            href="#capabilities"
             className="inline-flex items-center justify-center rounded-sm border border-offwhite/30 px-7 py-3.5 font-body text-sm font-semibold uppercase tracking-[0.1em] text-offwhite transition-all duration-300 ease-engineer hover:border-offwhite hover:bg-offwhite/5"
           >
-            Talk to Us
+            Explore Our Capabilities
           </a>
         </div>
       </div>
