@@ -100,6 +100,15 @@ export default function Footer() {
             {site.domain} · Reg. {site.registration.number}
           </p>
         </div>
+
+        <a
+          href="https://www.anonymiketech.space"
+          target="_blank"
+          rel="noreferrer"
+          className="curated-credit mx-auto mt-5 block w-fit text-center font-mono text-[10px] uppercase tracking-[0.1em] text-offwhite/45 transition-colors hover:text-leaf"
+        >
+          Curated with <span aria-label="love">❤️</span> by ANONYMIKETECH
+        </a>
       </div>
     </footer>
   );
