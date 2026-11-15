@@ -25,6 +25,36 @@ body {
   color: #14171a;
 }
 
+/* EcoAdmin themes are intentionally scoped so public pages keep the brand
+   palette. Utility classes remain in place for layout, while these semantic
+   overrides let an admin change the entire control-room atmosphere. */
+.ecoadmin-theme {
+  background-color: var(--admin-bg) !important;
+  color: var(--admin-text) !important;
+  font-family: var(--admin-font-body);
+}
+
+.ecoadmin-theme .font-body { font-family: var(--admin-font-body) !important; }
+.ecoadmin-theme .font-display { font-family: var(--admin-font-display) !important; }
+.ecoadmin-theme .font-mono { font-family: var(--admin-font-mono) !important; }
+.ecoadmin-theme [class*="bg-offwhite-dim"] { background-color: var(--admin-bg) !important; }
+.ecoadmin-theme [class*="bg-white"] { background-color: var(--admin-surface) !important; }
+.ecoadmin-theme [class*="bg-charcoal"] { background-color: var(--admin-sidebar) !important; }
+.ecoadmin-theme [class*="text-charcoal/"] { color: color-mix(in srgb, var(--admin-text) 58%, transparent) !important; }
+.ecoadmin-theme [class~="text-charcoal"] { color: var(--admin-text) !important; }
+.ecoadmin-theme [class*="text-offwhite/"] { color: color-mix(in srgb, var(--admin-sidebar-text) 68%, transparent) !important; }
+.ecoadmin-theme [class*="text-offwhite"] { color: var(--admin-sidebar-text) !important; }
+.ecoadmin-theme [class*="text-leaf/"] { color: color-mix(in srgb, var(--admin-accent) 70%, transparent) !important; }
+.ecoadmin-theme [class*="text-leaf"] { color: var(--admin-accent) !important; }
+.ecoadmin-theme [class*="border-charcoal/"] { border-color: color-mix(in srgb, var(--admin-border) 70%, transparent) !important; }
+.ecoadmin-theme [class*="border-offwhite/"] { border-color: color-mix(in srgb, var(--admin-sidebar-text) 18%, transparent) !important; }
+.ecoadmin-theme [class*="border-leaf"] { border-color: var(--admin-accent) !important; }
+.ecoadmin-theme [class*="bg-leaf/"] { background-color: var(--admin-accent-soft) !important; }
+.ecoadmin-theme [class~="bg-leaf"] { background-color: var(--admin-accent) !important; }
+.ecoadmin-theme [class*="hover\\:bg-charcoal"]:hover { background-color: var(--admin-sidebar) !important; }
+.ecoadmin-theme [class*="hover\\:text-leaf"]:hover { color: var(--admin-accent) !important; }
+.ecoadmin-theme :focus-visible { outline-color: var(--admin-accent) !important; }
+
 body {
   font-family: var(--font-body, sans-serif);
 }

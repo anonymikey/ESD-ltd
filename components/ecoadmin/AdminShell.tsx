@@ -5,6 +5,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import NotificationBell from "./NotificationBell";
+import type { AdminTheme } from "@/lib/ecoadmin/theme";
+
+const FONT_STACKS: Record<AdminTheme["font"], { display: string; body: string; mono: string }> = {
+  system: { display: 'Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif', body: 'Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif', mono: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" },
+  editorial: { display: 'Georgia, "Times New Roman", serif', body: '"Trebuchet MS", Arial, sans-serif', mono: '"Courier New", Courier, monospace' },
+  geometric: { display: 'Futura, "Century Gothic", "Trebuchet MS", sans-serif', body: '"Avenir Next", Avenir, "Segoe UI", sans-serif', mono: 'Consolas, "Liberation Mono", monospace' },
+  humanist: { display: '"Gill Sans", "Trebuchet MS", sans-serif', body: "Verdana, Geneva, sans-serif", mono: '"Lucida Console", Monaco, monospace' },
+  technical: { display: '"Arial Narrow", "Roboto Condensed", Arial, sans-serif', body: "Arial, Helvetica, sans-serif", mono: '"Roboto Mono", "Courier New", monospace' },
+};
 
 const NAV = [
   { href: "/ecoadmin", label: "Dashboard" },
@@ -22,16 +31,33 @@ function isActive(pathname: string, href: string) {
 
 export default function AdminShell({
   displayName,
+  theme,
   children,
 }: {
   displayName: string;
+  theme: AdminTheme;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const fonts = FONT_STACKS[theme.font];
+  const themeStyle = {
+    "--admin-bg": theme.background,
+    "--admin-surface": theme.surface,
+    "--admin-sidebar": theme.sidebar,
+    "--admin-text": theme.text,
+    "--admin-muted": theme.muted,
+    "--admin-accent": theme.accent,
+    "--admin-accent-soft": theme.accentSoft,
+    "--admin-border": theme.border,
+    "--admin-sidebar-text": theme.sidebarText,
+    "--admin-font-display": fonts.display,
+    "--admin-font-body": fonts.body,
+    "--admin-font-mono": fonts.mono,
+  } as React.CSSProperties;
 
   return (
-    <div className="min-h-screen bg-offwhite-dim md:flex">
+    <div className="ecoadmin-theme min-h-screen bg-offwhite-dim md:flex" style={themeStyle}>
       {/* Desktop sidebar */}
       <aside className="hidden w-60 shrink-0 flex-col border-r border-charcoal/10 bg-charcoal text-offwhite md:flex">
         <div className="flex items-center justify-between gap-2.5 border-b border-offwhite/10 px-6 py-5">

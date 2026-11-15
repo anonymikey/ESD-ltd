@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import AdminShell from "@/components/ecoadmin/AdminShell";
 import { checkAdmin } from "@/lib/ecoadmin/auth";
+import { getAdminTheme } from "@/lib/ecoadmin/theme";
 
 // Every route inside this group re-verifies admin status server-side, in
 // addition to the middleware check — a deliberate second layer. Middleware
@@ -14,6 +15,7 @@ export default async function EcoAdminLayout({ children }: { children: React.Rea
   }
 
   const displayName = result.context.displayName ?? result.context.user.email ?? "Admin";
+  const theme = await getAdminTheme(result.context.adminId);
 
-  return <AdminShell displayName={displayName}>{children}</AdminShell>;
+  return <AdminShell displayName={displayName} theme={theme}>{children}</AdminShell>;
 }

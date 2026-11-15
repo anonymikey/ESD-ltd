@@ -2,6 +2,8 @@ import Link from "next/link";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { checkAdmin } from "@/lib/ecoadmin/auth";
 import { RETENTION_PRESETS, countEligibleForDeletion, getLastCleanupRun, getRetentionSettings } from "@/lib/ecoadmin/retention";
+import { FONT_OPTIONS, getAdminTheme, THEME_PRESETS, type FontKey } from "@/lib/ecoadmin/theme";
+import ThemeStudio from "@/components/ecoadmin/ThemeStudio";
 import { updateRetentionDays } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -37,6 +39,8 @@ export default async function SettingsPage() {
   const { retentionDays, updatedAt } = await getRetentionSettings();
   const eligibleCount = await countEligibleForDeletion(retentionDays);
   const lastCleanup = await getLastCleanupRun();
+  const theme = admin.ok ? await getAdminTheme(admin.context.adminId) : undefined;
+  const fonts = Object.entries(FONT_OPTIONS).map(([key, value]) => ({ key: key as FontKey, label: value.label }));
 
   return (
     <div>
@@ -64,6 +68,8 @@ export default async function SettingsPage() {
           <p className="mt-1 font-body text-sm text-charcoal">{admin.context.user.email}</p>
         </div>
       )}
+
+      {theme && <ThemeStudio initialTheme={theme} presets={THEME_PRESETS} fonts={fonts} />}
 
       {/* Retention & Cleanup */}
       <div className="mt-10 max-w-lg">
