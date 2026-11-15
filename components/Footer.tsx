@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { navLinks, site } from "@/lib/data";
 import AccessibilityFooterTrigger from "@/components/AccessibilityFooterTrigger";
+import BackToTop from "@/components/BackToTop";
 
 export default function Footer() {
   return (
@@ -111,6 +112,7 @@ export default function Footer() {
           Curated with <span aria-label="love">❤️</span> by ANONYMIKETECH
         </a>
         <AccessibilityFooterTrigger />
+        <BackToTop />
       </div>
     </footer>
   );
