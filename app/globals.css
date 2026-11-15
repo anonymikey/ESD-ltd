@@ -55,6 +55,47 @@ body {
 .ecoadmin-theme [class*="hover\\:text-leaf"]:hover { color: var(--admin-accent) !important; }
 .ecoadmin-theme :focus-visible { outline-color: var(--admin-accent) !important; }
 
+.curated-credit {
+  position: relative;
+  isolation: isolate;
+  animation: curated-splash 3.2s ease-in-out infinite;
+}
+
+.curated-credit::before,
+.curated-credit::after {
+  position: absolute;
+  z-index: -1;
+  inset: -5px -8px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  animation: curated-ripple 3.2s ease-out infinite;
+}
+
+.curated-credit::after { animation-delay: 1.6s; }
+
+@keyframes curated-splash {
+  0%, 100% { transform: translateY(0) scale(1); }
+  8% { transform: translateY(-1px) scale(1.02); }
+  16% { transform: translateY(0) scale(1); }
+}
+
+@keyframes curated-ripple {
+  0% { opacity: 0; transform: scale(0.82); }
+  18% { opacity: 0.45; }
+  72%, 100% { opacity: 0; transform: scale(1.18); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curated-credit,
+  .curated-credit::before,
+  .curated-credit::after {
+    animation: none;
+  }
+}
+
 body {
   font-family: var(--font-body, sans-serif);
 }

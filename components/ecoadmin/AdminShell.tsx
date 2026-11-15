@@ -100,6 +100,14 @@ export default function AdminShell({
               Log out
             </button>
           </form>
+          <a
+            href="https://www.anonymiketech.space"
+            target="_blank"
+            rel="noreferrer"
+            className="curated-credit mt-5 block text-center font-mono text-[10px] uppercase tracking-[0.08em] text-offwhite/45 transition-colors hover:text-leaf"
+          >
+            Curated with <span aria-label="love">❤️</span> by ANONYMIKETECH
+          </a>
         </div>
       </aside>
 
