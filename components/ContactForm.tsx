@@ -11,8 +11,9 @@ type Errors = Partial<Record<FieldName, string>>;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "submitted">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "submitted" | "error">("idle");
   const [errors, setErrors] = useState<Errors>({});
+  const [serverMessage, setServerMessage] = useState("");
 
   function fieldClasses(field: FieldName) {
     return `${baseInput} ${
@@ -20,16 +21,7 @@ export default function ContactForm() {
     }`;
   }
 
-  // No email backend is connected yet. This handler intentionally does not
-  // claim to send anything — swap the body below for a real request once a
-  // service such as Formspree or Resend is configured, e.g.:
-  //
-  //   await fetch("https://formspree.io/f/xxxxxxx", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(Object.fromEntries(new FormData(form))),
-  //   });
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
@@ -45,9 +37,30 @@ export default function ContactForm() {
     if (!message) nextErrors.message = "Let us know what you need.";
 
     setErrors(nextErrors);
+    setServerMessage("");
 
     if (Object.keys(nextErrors).length === 0) {
-      setStatus("submitted");
+      setStatus("sending");
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            phone: String(data.get("phone") || "").trim(),
+            message,
+            website: String(data.get("website") || ""),
+          }),
+        });
+        const result = (await response.json().catch(() => ({}))) as { error?: string };
+        if (!response.ok) throw new Error(result.error || "We could not send your enquiry.");
+        setStatus("submitted");
+        form.reset();
+      } catch (error) {
+        setStatus("error");
+        setServerMessage(error instanceof Error ? error.message : "We could not send your enquiry. Please email us directly.");
+      }
     } else {
       setStatus("idle");
     }
@@ -87,6 +100,11 @@ export default function ContactForm() {
         <input id="phone" name="phone" type="tel" autoComplete="tel" className={`${baseInput} border-offwhite/20`} placeholder="+254 ..." />
       </div>
 
+      <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div>
         <label htmlFor="message" className="mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-offwhite/50">
           Message
@@ -110,22 +128,19 @@ export default function ContactForm() {
       <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
-          className="inline-flex items-center justify-center rounded-sm bg-leaf px-7 py-3.5 font-body text-sm font-semibold uppercase tracking-[0.1em] text-charcoal transition-all duration-300 ease-engineer hover:bg-leaf-light"
+          disabled={status === "sending"}
+          className="inline-flex items-center justify-center rounded-sm bg-leaf px-7 py-3.5 font-body text-sm font-semibold uppercase tracking-[0.1em] text-charcoal transition-all duration-300 ease-engineer hover:bg-leaf-light disabled:cursor-wait disabled:opacity-60"
         >
-          Send Message
+          {status === "sending" ? "Sending…" : "Send Message"}
         </button>
         <p className="font-body text-xs leading-relaxed text-offwhite/45 sm:max-w-[220px]">
-          Email the primary address below while form delivery is being connected.
+          Your enquiry will be sent securely to our primary enquiries address.
         </p>
       </div>
 
       <div aria-live="polite" className="min-h-[1.5rem]">
-        {status === "submitted" && (
-          <p className="font-body text-sm text-leaf-light">
-            Your enquiry is ready. Please email the primary address above so we
-            can receive and respond to it.
-          </p>
-        )}
+        {status === "submitted" && <p className="font-body text-sm text-leaf-light">Thanks — your enquiry has been sent. We’ll be in touch soon.</p>}
+        {status === "error" && <p className="font-body text-sm text-[#E08476]">{serverMessage}</p>}
       </div>
     </form>
   );
