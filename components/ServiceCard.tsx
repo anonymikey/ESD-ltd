@@ -2,6 +2,7 @@ interface ServiceCardProps {
   letter: string;
   name: string;
   description: string;
+  href: string;
 }
 
 function CornerMark({ className }: { className: string }) {
@@ -16,7 +17,7 @@ function CornerMark({ className }: { className: string }) {
   );
 }
 
-export default function ServiceCard({ letter, name, description }: ServiceCardProps) {
+export default function ServiceCard({ letter, name, description, href }: ServiceCardProps) {
   return (
     <div className="group relative flex h-full flex-col justify-between border border-offwhite/12 p-8 transition-all duration-500 ease-engineer hover:-translate-y-1 hover:border-leaf/50 hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.55)] md:p-9">
       {/* Drafting-style corner marks, appear on hover */}
@@ -35,7 +36,7 @@ export default function ServiceCard({ letter, name, description }: ServiceCardPr
         </p>
       </div>
 
-      <div className="mt-10 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-offwhite/50 transition-colors duration-300 group-hover:text-leaf">
+      <a href={href} className="mt-10 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-offwhite/50 transition-colors duration-300 group-hover:text-leaf">
         Learn more
         <svg
           width="16"
@@ -52,7 +53,7 @@ export default function ServiceCard({ letter, name, description }: ServiceCardPr
             strokeLinecap="square"
           />
         </svg>
-      </div>
+      </a>
 
       <span
         className="pointer-events-none absolute inset-x-0 bottom-0 h-px scale-x-0 bg-leaf transition-transform duration-500 ease-engineer group-hover:scale-x-100"

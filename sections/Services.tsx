@@ -32,6 +32,7 @@ export default function Services({ compact = false }: ServicesProps) {
                 letter={category.letter}
                 name={category.name}
                 description={category.description}
+                href={`${compact ? "/services" : ""}#service-${category.letter}`}
               />
             </div>
           ))}

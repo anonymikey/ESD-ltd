@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Services from "@/sections/Services";
+import ServiceDetails from "@/sections/ServiceDetails";
 import TechAI from "@/sections/TechAI";
 import Quality from "@/sections/Quality";
 
@@ -17,6 +18,7 @@ export default function ServicesPage() {
       <Navbar />
       <main id="main-content" className="bg-offwhite pt-20 md:pt-28">
         <Services />
+        <ServiceDetails />
         <TechAI />
         <Quality />
       </main>
